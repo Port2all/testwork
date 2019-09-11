@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="DROPBOX EXPLORER"/>
   </div>
 </template>
 
@@ -15,4 +15,15 @@ export default {
     HelloWorld
   }
 }
+
+let Dropbox = require('dropbox').Dropbox;
+let dbx = new Dropbox({ accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v' });
+dbx.filesListFolder({path: ''})
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
 </script>
