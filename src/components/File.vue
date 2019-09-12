@@ -2,8 +2,8 @@
     <tr class="file">
         <td>File</td>
         <td>{{ name }}</td>
-        <td>{{ size }}</td>
-        <td>{{ new Date(date).toLocaleString()  }}</td>
+        <td>{{ formatBytes(size) }}</td>
+        <td>{{ formatDate(new Date(date)) }}</td>
     </tr>
 </template>
 
@@ -17,39 +17,41 @@
             size: Number,
             date: String,
         },
-        /*data() {
-            return {
-                formatedDate: 'изменено' + formatDate(this.date),
-            }
-        },*/
         methods: {
+             formatBytes(bytes, decimals = 2) {
+                if (bytes === 0) return '0 Bytes';
 
-        },
-        created(){
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-           /* function formatDate(date) {
-                let time = new Date(Date.parse(date));
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-                let diff = new Date() - this.date; // разница в миллисекундах
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            },
+            formatDate(value) {
+                let time = new Date(value);
+
+                let diff = new Date() - value; // разница в миллисекундах
 
                 if (diff < 1000) { // меньше 1 минуты
-                    return 'прямо сейчас';
+                    return 'right now';
                 }
 
                 let sec = Math.floor(diff / 1000); // преобразовать разницу в секунды
 
                 if (sec < 60) {
-                    return sec + ' сек. назад';
+                    return sec + ' sec. ago';
                 }
 
                 let min = Math.floor(diff / 60000); // преобразовать разницу в минуты
                 if (min < 60) {
-                    return min + ' мин. назад';
+                    return min + ' min. ago';
                 }
 
                 // отформатировать дату
                 // добавить ведущие нули к единственной цифре дню/месяцу/часам/минутам
-                let d = date;
+                let d = value;
                 d = [
                     '0' + d.getDate(),
                     '0' + (d.getMonth() + 1),
@@ -61,7 +63,8 @@
                 // соединить компоненты в дату
                 return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
             }
-*/
+        },
+        created(){
 
         }
 
