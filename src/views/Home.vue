@@ -1,29 +1,39 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="DROPBOX EXPLORER"/>
+    <dropboxViewer msg="DROPBOX EXPLORER" v-bind:folderList="folderList" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import dropboxViewer from '@/components/dropboxViewer.vue'
+import {Dropbox} from "dropbox";
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    dropboxViewer
+  },
+  data() {
+    return {
+      folderList: {},
+    }
+  },
+  created() {
+
+    let dbx = new Dropbox({accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v'});
+    dbx.filesListFolder({path: ''})
+            .then(response => {
+              this.folderList = response.entries;
+              console.log(response.entries);
+            })
+            .catch(error => {
+              console.log(error);
+            });
   }
 }
 
-let Dropbox = require('dropbox').Dropbox;
-let dbx = new Dropbox({ accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v' });
-dbx.filesListFolder({path: ''})
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+
 
 </script>
