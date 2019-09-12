@@ -1,5 +1,5 @@
 <template>
-    <tr class="folder">
+    <tr class="folder" @click="onFolderClick">
         <td>Folder</td>
         <td>{{ name }}</td>
         <td colspan="2"></td>
@@ -12,6 +12,16 @@
         name: 'Folder',
         props: {
             name: String,
+        },
+        methods: {
+            onFolderClick() {
+                this.$router.push({
+                    name: 'home',
+                    params: {
+                        path: name
+                    }
+                })
+            }
         }
     }
 

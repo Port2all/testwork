@@ -2,6 +2,8 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <dropboxViewer v-bind:folderList="folderList" />
+    {{ getFolderFromPath(path) }}
+
   </div>
 </template>
 
@@ -10,10 +12,40 @@
 import dropboxViewer from '@/components/dropboxViewer.vue'
 import {Dropbox} from "dropbox";
 
+let dbx = new Dropbox({accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v'});
+
+
 export default {
   name: 'home',
   components: {
     dropboxViewer
+  },
+  props: {
+    path: String,
+  },
+  methods: {
+          getFolderFromPath(path){
+             if(path !== ''){
+            dbx.filesListFolder({path: '/' + path})
+                    .then(response => {
+                      this.folderList = response.entries;
+                      console.log(folderList);
+                    })
+                    .catch(error => {
+                      console.log(error);
+                    });
+              }
+               else{
+        dbx.filesListFolder({path: ''})
+                .then(response => {
+                  this.folderList = response.entries;
+                  console.log(folderList);
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+      }
+          }
   },
   data() {
     return {
@@ -21,17 +53,7 @@ export default {
     }
   },
   created() {
-
-    let dbx = new Dropbox({accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v'});
-    dbx.filesListFolder({path: ''})
-            .then(response => {
-              this.folderList = response.entries;
-              console.log(response);
-            })
-            .catch(error => {
-              console.log(error);
-            });
-
+console.log(this.path);
   }
 }
 

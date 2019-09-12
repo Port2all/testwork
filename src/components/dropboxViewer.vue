@@ -1,6 +1,6 @@
 <template>
     <div class="dropboxViewer container">
-        <h1>{{ folderList[0].path_lower }}</h1>
+        <h1>{{ '/' + this.path }}</h1>
 
         <table class="table table-striped">
             <thead>
@@ -38,14 +38,19 @@
         },
         props: {
             msg: String,
-            folderList: Array
+            folderList: Array,
+            path: String,
         },
         data() {
             return{
 
             }
+        },
+        created() {
+            console.log('aaa' + path); //2222
         }
     }
+
 
 
 
