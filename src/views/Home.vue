@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <dropboxViewer msg="DROPBOX EXPLORER" v-bind:folderList="folderList" />
+    <dropboxViewer v-bind:folderList="folderList" />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      folderList: {},
+      folderList: [],
     }
   },
   created() {
@@ -26,7 +26,7 @@ export default {
     dbx.filesListFolder({path: ''})
             .then(response => {
               this.folderList = response.entries;
-              console.log(response.entries);
+              console.log(response);
             })
             .catch(error => {
               console.log(error);

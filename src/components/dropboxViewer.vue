@@ -1,6 +1,6 @@
 <template>
     <div class="dropboxViewer container">
-        <h1>{{ msg }}</h1>
+        <h1>{{ folderList[0].path_lower }}</h1>
 
         <table class="table table-striped">
             <thead>
@@ -8,18 +8,17 @@
                 <th scope="col">Type</th>
                 <th scope="col">Name</th>
                 <th scope="col">Size</th>
-                <th scope="col">Creation date</th>
                 <th scope="col">Last modified</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="item in folderList">
-                <td>{{ item['.tag'] }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.size }}</td>
-                <td>{{ item.server_modified }}</td>
-                <td>{{ item.client_modified }}</td>
-            </tr>
+            <component :is="item['.tag']"
+                       v-for="item in folderList"
+                       :name="item.name"
+                       :size="item.size"
+                       :date="item.server_modified">
+
+            </component>
             </tbody>
         </table>
 
@@ -28,17 +27,23 @@
 </template>
 
 <script>
+    import File from '@/components/File.vue';
+    import Folder from '@/components/Folder.vue';
 
     export default {
         name: 'dropboxViewer',
-        data() {
-            return{
-
-        }
+        components:{
+          'file': File,
+          'folder': Folder
         },
         props: {
             msg: String,
             folderList: Array
+        },
+        data() {
+            return{
+
+            }
         }
     }
 
