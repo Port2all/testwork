@@ -30,7 +30,7 @@
                 return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
             },
             formatDate(value) {
-                let time = new Date(value);
+
 
                 let diff = new Date() - value; // разница в миллисекундах
 

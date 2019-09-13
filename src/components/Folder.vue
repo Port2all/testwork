@@ -15,13 +15,14 @@
         },
         methods: {
             onFolderClick() {
-                this.$router.push({
-                    name: 'home',
-                    params: {
-                        path: name
-                    }
+              this.$router.push({
+                    path: this.$route.path + '/' + this.name
                 })
+                console.log('doshlo' + this.$route.path + name);
             }
+        },
+        created() {
+            console.log(this.$route.path);
         }
     }
 

@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <dropboxViewer v-bind:folderList="folderList" />
-    {{ getFolderFromPath(path) }}
+    <dropboxViewer v-bind:folderList="folderList" v-bind:path="$route.path" />
+
 
   </div>
 </template>
@@ -12,7 +12,6 @@
 import dropboxViewer from '@/components/dropboxViewer.vue'
 import {Dropbox} from "dropbox";
 
-let dbx = new Dropbox({accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v'});
 
 
 export default {
@@ -21,31 +20,7 @@ export default {
     dropboxViewer
   },
   props: {
-    path: String,
-  },
-  methods: {
-          getFolderFromPath(path){
-             if(path !== ''){
-            dbx.filesListFolder({path: '/' + path})
-                    .then(response => {
-                      this.folderList = response.entries;
-                      console.log(folderList);
-                    })
-                    .catch(error => {
-                      console.log(error);
-                    });
-              }
-               else{
-        dbx.filesListFolder({path: ''})
-                .then(response => {
-                  this.folderList = response.entries;
-                  console.log(folderList);
-                })
-                .catch(error => {
-                  console.log(error);
-                });
-      }
-          }
+
   },
   data() {
     return {
@@ -53,10 +28,35 @@ export default {
     }
   },
   created() {
-console.log(this.path);
+    this.getFolderFromPath(this.$route.path)
+  },
+  beforeRouteUpdate(to, from) {
+    this.getFolderFromPath(to.path)
+  },
+  methods: {
+          getFolderFromPath(path){
+            let dbx = new Dropbox({accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v'});
+            path = path.trim();
+            path = path === '/' ? '' : path;
+            dbx.filesListFolder({path: path})
+                    .then(response => {
+                      this.folderList = response.entries;
+                    })
+                    .catch(error => {
+                      console.log(error);
+                    });
+
+
+          }
   }
+
 }
 
 
-
 </script>
+
+<style scoped>
+  h1{
+    text-align:center;
+  }
+</style>
