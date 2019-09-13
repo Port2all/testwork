@@ -17,12 +17,12 @@
             onFolderClick() {
               this.$router.push({
                     path: this.$route.path + '/' + this.name
-                })
+                });
                 console.log('doshlo' + this.$route.path + name);
             }
         },
         created() {
-            console.log(this.$route.path);
+
         }
     }
 

@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
+
     <dropboxViewer v-bind:folderList="folderList" v-bind:path="$route.path" />
 
 
@@ -31,7 +32,7 @@ export default {
     this.getFolderFromPath(this.$route.path)
   },
   beforeRouteUpdate(to, from) {
-    this.getFolderFromPath(to.path)
+    this.getFolderFromPath(to.path);
   },
   methods: {
           getFolderFromPath(path){

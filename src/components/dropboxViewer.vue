@@ -58,7 +58,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-td, th{
+tr{
     text-align:left;
 }
 h1{
