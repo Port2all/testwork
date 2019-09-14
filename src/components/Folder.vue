@@ -15,8 +15,9 @@
         },
         methods: {
             onFolderClick() {
+                const currentPath = this.$route.path === '/' ? '' : this.$route.path
               this.$router.push({
-                    path: this.$route.path + '/' + this.name
+                    path: currentPath + '/' + this.name
                 });
                 console.log('doshlo' + this.$route.path + name);
             }
