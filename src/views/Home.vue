@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div v-if="loading" id="loading">
+      <img src="https://media0.giphy.com/media/17mNCcKU1mJlrbXodo/giphy.gif">
+    </div>
     <img alt="Vue logo" src="../assets/logo.png">
 
     <dropboxViewer v-bind:folderList="folderList" v-bind:path="$route.path" />
@@ -26,6 +29,7 @@ export default {
   data() {
     return {
       folderList: [],
+      loading: false,
     }
   },
   created() {
@@ -40,9 +44,11 @@ export default {
             let dbx = new Dropbox({accessToken: 'zRQCPz88YEAAAAAAAAAAEdOAeIFUECs2_TX41zjv8lgxiSuS5qTG2dSBwgoczc6v'});
             path = path.trim();
             path = path === '/' ? '' : path;
+            this.loading = true;
             dbx.filesListFolder({path: path})
                     .then(response => {
                       this.folderList = response.entries;
+                      this.loading = false;
                     })
                     .catch(error => {
                       console.log(error);
@@ -57,8 +63,18 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
   h1{
     text-align:center;
+  }
+
+  #loading{
+    position: fixed;
+    z-index:5;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.5;
+    padding-top: 20%;
   }
 </style>

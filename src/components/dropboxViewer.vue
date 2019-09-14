@@ -1,6 +1,6 @@
 <template>
     <div class="dropboxViewer container">
-        <h1>{{ $route.path }}</h1>
+        <h2>{{ $route.path }}</h2>
 
         <table class="table table-striped">
             <thead>
@@ -73,7 +73,7 @@
 tr{
     text-align:left;
 }
-h1{
+h2{
     text-align:left;
 }
 </style>
