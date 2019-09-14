@@ -31,8 +31,9 @@ export default {
   created() {
     this.getFolderFromPath(this.$route.path)
   },
-  beforeRouteUpdate(to, from) {
+  beforeRouteUpdate(to, from, next) {
     this.getFolderFromPath(to.path);
+    next()
   },
   methods: {
           getFolderFromPath(path){

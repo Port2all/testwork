@@ -1,6 +1,6 @@
 <template>
     <div class="dropboxViewer container">
-        <h1>{{ this.path }}</h1>
+        <h1>{{ $route.path }}</h1>
 
         <table class="table table-striped">
             <thead>
@@ -12,6 +12,9 @@
             </tr>
             </thead>
             <tbody>
+            <tr>
+                <td colspan="4" v-if="$route.path !== '/'" @click="back">..</td>
+            </tr>
             <component :is="item['.tag']"
                        v-for="item in folderList"
                        :name="item.name"
@@ -47,6 +50,15 @@
         },
         created() {
 
+        },
+        methods: {
+            back(){
+                const pathArr = this.$route.path.split('/');
+                const backPath = pathArr.slice(0, pathArr.length - 1).join('/');
+                this.$router.push({
+                    path: backPath || '/'
+                })
+            }
         }
     }
 
