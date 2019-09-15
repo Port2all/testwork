@@ -29,7 +29,6 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### The app works on Vue JS framework.
 
 ### Technologies, used in app:
 JS, Vue.js, Vue-router, Bootstrap, Bootstrap-Vue, Dropbox API, CSS, html.
