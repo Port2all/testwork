@@ -1,6 +1,6 @@
 <template>
     <tr class="folder" @click="onFolderClick">
-        <td>Folder</td>
+        <td><img src="https://img.icons8.com/cotton/2x/folder-invoices--v1.png" class="folderIcon">Folder</td>
         <td>{{ name }}</td>
         <td colspan="2"></td>
     </tr>
@@ -19,7 +19,6 @@
               this.$router.push({
                     path: currentPath + '/' + this.name
                 });
-                console.log('doshlo' + this.$route.path + name);
             }
         },
         created() {
@@ -33,5 +32,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.folder{background-color:yellow;}
+.folderIcon{width:25px;}
+  tr{cursor: pointer;}
 </style>

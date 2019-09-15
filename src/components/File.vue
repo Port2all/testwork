@@ -1,6 +1,6 @@
 <template>
     <tr class="file" v-bind:class="isChecked">
-        <td  >
+        <td>
             <b-form-checkbox  @change="onFileClick">
                 File
             </b-form-checkbox>
@@ -97,4 +97,8 @@
     background-color: #c8f4f4!important;
     border: 2px solid #98dfff;
 }
+    tr:hover{
+        cursor:pointer;
+        background-color: #c8f4f4 !important;
+    }
 </style>

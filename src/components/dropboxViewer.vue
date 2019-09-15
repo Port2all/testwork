@@ -1,6 +1,6 @@
 <template>
     <div class="dropboxViewer container">
-        <h2>{{ $route.path }}</h2>
+        <h2><a href="/">DropBox</a>{{ $route.path }}</h2>
 
         <table class="table table-striped">
             <thead>
@@ -13,15 +13,17 @@
             </thead>
             <tbody>
             <tr>
-                <td colspan="4" v-if="$route.path !== '/'" @click="back">..</td>
+                <td colspan="4" v-if="$route.path !== '/'" @click="back" class="goUp">..</td>
             </tr>
             <component :is="item['.tag']"
                        v-for="item in folderList"
                        :name="item.name"
                        :size="item.size"
                        :date="item.server_modified">
-
             </component>
+            <tr>
+                <td colspan="4" v-if="folderList.length === 0" class="error">This folder is empty.</td>
+            </tr>
             </tbody>
         </table>
 
@@ -49,7 +51,7 @@
             }
         },
         created() {
-
+            console.log(this.folderList.length);
         },
         methods: {
             back(){
@@ -76,4 +78,10 @@ tr{
 h2{
     text-align:left;
 }
+.goUp{
+        cursor: pointer;
+}
+    .error{
+        background-color: #f7d4df;
+    }
 </style>
