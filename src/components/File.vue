@@ -1,6 +1,10 @@
 <template>
-    <tr class="file">
-        <td>File</td>
+    <tr class="file" v-bind:class="isChecked">
+        <td  >
+            <b-form-checkbox  @change="onFileClick">
+                File
+            </b-form-checkbox>
+            </td>
         <td>{{ name }}</td>
         <td>{{ formatBytes(size) }}</td>
         <td>{{ formatDate(new Date(date)) }}</td>
@@ -16,6 +20,11 @@
             name: String,
             size: Number,
             date: String,
+        },
+        data() {
+            return {
+            isChecked: '111',
+            }
         },
         methods: {
              formatBytes(bytes, decimals = 2) {
@@ -62,6 +71,14 @@
 
                 // соединить компоненты в дату
                 return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+            },
+            onFileClick() {
+                if(this.isChecked === 'checkedFile') {
+                    this.isChecked = '';
+                }
+                else{
+                this.isChecked = 'checkedFile';
+                }
             }
         },
         created(){
@@ -76,5 +93,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.checkedFile{
+    background-color: #c8f4f4!important;
+    border: 2px solid #98dfff;
+}
 </style>
