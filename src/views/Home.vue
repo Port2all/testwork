@@ -48,6 +48,7 @@ export default {
             dbx.filesListFolder({path: path})
                     .then(response => {
                       this.folderList = response.entries;
+                      console.log(response.entries)
                       this.loading = false;
                     })
                     .catch(error => {

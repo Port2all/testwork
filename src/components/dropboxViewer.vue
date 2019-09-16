@@ -51,7 +51,7 @@
             }
         },
         created() {
-            console.log(this.folderList.length);
+
         },
         methods: {
             back(){

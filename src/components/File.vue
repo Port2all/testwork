@@ -5,10 +5,11 @@
                 File
             </b-form-checkbox>
             </td>
-        <td>{{ name }}</td>
+        <td>  {{ name }}  </td>
         <td>{{ formatBytes(size) }}</td>
         <td>{{ formatDate(new Date(date)) }}</td>
     </tr>
+
 </template>
 
 <script>
@@ -79,8 +80,8 @@
                 else{
                 this.isChecked = 'checkedFile';
                 }
-            }
-        },
+            },
+    },
         created(){
 
         }
@@ -97,8 +98,10 @@
     background-color: #c8f4f4!important;
     border: 2px solid #98dfff;
 }
-    tr:hover{
+
+tr:hover{
         cursor:pointer;
         background-color: #c8f4f4 !important;
-    }
+}
+
 </style>
