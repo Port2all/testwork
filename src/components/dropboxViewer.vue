@@ -1,6 +1,6 @@
 <template>
     <div class="dropboxViewer container">
-        <h2><a href="/">DropBox</a>{{ $route.path }}</h2>
+        <h2><router-link to="/">DropBox</router-link>{{ $route.path }}</h2>
 
         <table class="table table-striped">
             <thead>

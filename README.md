@@ -60,3 +60,7 @@ formatDate(date) - for smart-viewing of last modified date (for files).
 onFileClick() - for selecting files.
 
 onFolderClick() - for folders opening.
+
+onTrClick() - shows delete button for files.
+
+onDeleteClick() -  shows alert with "Not implemented" massage for delete button.

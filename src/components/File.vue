@@ -1,13 +1,19 @@
 <template>
-    <tr class="file" v-bind:class="isChecked">
+    <tr class="file" v-bind:class="isChecked" @click="onTrClick($event)">
+
         <td>
-            <b-form-checkbox  @change="onFileClick">
+            <b-form-checkbox  @change="onFileClick" @click.prevent="">
                 File
             </b-form-checkbox>
             </td>
         <td>  {{ name }}  </td>
         <td>{{ formatBytes(size) }}</td>
-        <td>{{ formatDate(new Date(date)) }}</td>
+        <td>
+            {{ formatDate(new Date(date)) }}
+
+                <a  v-if="isDeleteShow" href="#"  class="deleteButton"  @click="onDeleteClick">X</a>
+
+        </td>
     </tr>
 
 </template>
@@ -24,7 +30,8 @@
         },
         data() {
             return {
-            isChecked: '111',
+                isChecked: '',
+                isDeleteShow: false,
             }
         },
         methods: {
@@ -74,6 +81,7 @@
                 return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
             },
             onFileClick() {
+
                 if(this.isChecked === 'checkedFile') {
                     this.isChecked = '';
                 }
@@ -81,7 +89,15 @@
                 this.isChecked = 'checkedFile';
                 }
             },
-    },
+            onTrClick(event) {
+               this.isDeleteShow = !this.isDeleteShow;
+            },
+            onDeleteClick() {
+
+                 alert('Not implemented');
+                this.isDeleteShow = !this.isDeleteShow;
+            }
+        },
         created(){
 
         }
@@ -98,10 +114,18 @@
     background-color: #c8f4f4!important;
     border: 2px solid #98dfff;
 }
-
+tr{
+    position: relative;
+}
 tr:hover{
         cursor:pointer;
         background-color: #c8f4f4 !important;
 }
-
+.deleteButton{
+    position: absolute;
+    font-size: 18px;
+    color: red;
+    font-weight: 900;
+    right: 10px;
+}
 </style>

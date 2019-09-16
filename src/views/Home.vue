@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div v-if="loading" id="loading">
-      <img src="https://media0.giphy.com/media/17mNCcKU1mJlrbXodo/giphy.gif">
+      <img src="../assets/loading.gif">
     </div>
     <img alt="Vue logo" src="../assets/logo.png">
 
@@ -71,6 +71,8 @@ export default {
 
   #loading{
     position: fixed;
+    top:0;
+    left: 0;
     z-index:5;
     width: 100%;
     height: 100%;
